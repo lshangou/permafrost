@@ -1,15 +1,15 @@
 import { Request, Response, NextFunction } from 'express'
-import { User } from '../interfaces/User'
+import { User } from '../models/User'
 
 export const authCheckMiddleware = (req: any, res: Response, next: NextFunction) => {
 
   //TODO: Check auth function
-  let user: User = {
-    name: "",
-    email: ""
-  }
+  // let user: User = {
+  //   name: "Lucas",
+  //   email: "lucas@email.com"
+  // }
 
-  req.user = user
+  // req.user = user
 
   next()
 }
