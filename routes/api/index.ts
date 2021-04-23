@@ -11,6 +11,7 @@ apiRouter.get('/', (req: Request, res: Response) => {
 })
 
 // Add routes here
+//apiRouter.use(path, routerFile)
 apiRouter.use('/user', userRouter)
 
 //
