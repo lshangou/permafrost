@@ -11,5 +11,7 @@ export const authCheckMiddleware = (req: any, res: Response, next: NextFunction)
 
   // req.user = user
 
+  // console.log("Essa rota pertece à api.")
+
   next()
 }
