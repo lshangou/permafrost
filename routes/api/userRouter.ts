@@ -13,10 +13,10 @@ userRouter.post('/create', (req: Request, res: Response) => {
 userRouter.put('/update/:id', (req: Request, res: Response) => {
   userController.update(req, res)
 })
-// userRouter.delete('/delete', (req: Request, res: Response) => {
-//   userController.delete(req, res)
-// })
-//Last one, since id is not a recgnizable word.
+userRouter.delete('/delete/:id', (req: Request, res: Response) => {
+  userController.delete(req, res)
+})
+//Last one, since id is not a recognizable word.
 userRouter.get('/:id', (req: Request, res: Response) => {
   userController.read(req, res)
 })
