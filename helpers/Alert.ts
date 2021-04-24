@@ -3,12 +3,13 @@ export interface Alert {
   type: string //notFound
   message: string //Client Error
   description: string //The requested resource was not found.
-  object?: object
+  data?: object
 }
 
 export const DefaultDatabaseAlert = {
   status: 500,
   type: "databaseError",
   message: "Server Error",
-  description: "The server could not resolve the request in the database."
+  description: "The server could not resolve the request in the database.",
+  data: {}
 }

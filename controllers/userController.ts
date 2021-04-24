@@ -46,7 +46,7 @@ export const userController = {
               type: "successfulRequest",
               message: "Success",
               description: "User " + newUser.name + " successfully registered.",
-              object: doc
+              data: doc
             }
             res.status(alert.status)
             res.json(alert)
@@ -59,9 +59,19 @@ export const userController = {
   read: function(req: Request, res: Response) {
     Users.findById(req.params.id, (err: any, doc: UserDocument) => {
       if(err) {
-        console.log(err)
+        let alert: Alert = DefaultDatabaseAlert
+        res.status(alert.status)
+        res.json(alert)
       }else {
-        res.json(doc)
+        let alert: Alert = {
+          status: 200,
+          type: "successfulRequest",
+          message: "Success",
+          description: "User list gathered.",
+          data: doc
+        }
+        res.status(alert.status)
+        res.json(alert)
       }
     })
   },
