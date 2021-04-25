@@ -1,10 +1,11 @@
 import express, { Request, Response } from 'express'
+import { pageController } from '../controllers/pageController'
 const websiteRouter = express.Router()
 
 
 // Add default pages here
 websiteRouter.get('/', (req: Request, res: Response) => {
-  res.send("Hello World. I'm in an website route. (/)")
+  pageController.render(req, res, 'entrance/login')
 })
 
 websiteRouter.get('/about', (req: Request, res: Response) => {
