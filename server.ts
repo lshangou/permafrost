@@ -10,6 +10,8 @@ const port = 3000
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
+app.use('/static', express.static('public'));
+
 setRoutes(app)
 
 app.listen(port, () => {

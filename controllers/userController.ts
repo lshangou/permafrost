@@ -8,9 +8,20 @@ export const userController = {
   readAll: function(req: Request, res: Response) {
     Users.find({}, (err: any, docs: UserDocument[]) => {
       if(err) {
+        let alert: Alert = DefaultDatabaseAlert
         console.log(err)
+        res.status(alert.status)
+        res.json(alert)
       }else {
-        res.json(docs)
+        let alert: Alert = {
+          status: 200,
+          type: "successfulRequest",
+          message: "Success",
+          description: "User list gathered.",
+          data: docs
+        }
+        res.status(alert.status)
+        res.json(alert)
       }
     })
   },
@@ -20,6 +31,7 @@ export const userController = {
     Users.find( { email: newUser.email }, (err: any, doc: UserDocument[]) => {
       if(err) {
         let alert: Alert = DefaultDatabaseAlert
+        console.log(err)
         res.status(alert.status)
         res.json(alert)
         return 'error'
@@ -35,8 +47,8 @@ export const userController = {
       }else {
         Users.create(newUser, (err: any, doc: UserDocument) => {
           if(err) {
-            console.log(err)
             let alert: Alert = DefaultDatabaseAlert
+            console.log(err)
             res.status(alert.status)
             res.json(alert)
           }else {
@@ -60,6 +72,7 @@ export const userController = {
     Users.findById(req.params.id, (err: any, doc: UserDocument) => {
       if(err) {
         let alert: Alert = DefaultDatabaseAlert
+        console.log(err)
         res.status(alert.status)
         res.json(alert)
       }else {
@@ -67,7 +80,7 @@ export const userController = {
           status: 200,
           type: "successfulRequest",
           message: "Success",
-          description: "User list gathered.",
+          description: "User gathered.",
           data: doc
         }
         res.status(alert.status)
@@ -83,9 +96,20 @@ export const userController = {
     if(req.body.password) { updatableItens.password = req.body.password }
     Users.findByIdAndUpdate( { _id: req.params.id }, updatableItens, null, (err: any, doc: any) => {
       if(err) {
+        let alert: Alert = DefaultDatabaseAlert
         console.log(err)
+        res.status(alert.status)
+        res.json(alert)
       }else {
-        res.json(doc)
+        let alert: Alert = {
+          status: 200,
+          type: "successfulRequest",
+          message: "Success",
+          description: "User " + doc.id + " updated.",
+          data: doc
+        }
+        res.status(alert.status)
+        res.json(alert)
       }
     });
   },
@@ -93,9 +117,20 @@ export const userController = {
   delete: function(req: Request, res: Response) {
     Users.findByIdAndDelete( { _id: req.params.id }, null, (err: any, doc: any) => {
       if(err) {
+        let alert: Alert = DefaultDatabaseAlert
         console.log(err)
+        res.status(alert.status)
+        res.json(alert)
       }else {
-        res.json(doc.name + " deleted.")
+        let alert: Alert = {
+          status: 200,
+          type: "successfulRequest",
+          message: "Success",
+          description: "User " + doc.name + " deleted.",
+          data: doc
+        }
+        res.status(alert.status)
+        res.json(alert)
       }
     })
   }

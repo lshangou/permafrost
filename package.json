@@ -5,8 +5,9 @@
   "main": "server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "tsc && node app/server.js",
-    "dev": "nodemon -e ts  --exec \"npm run compile\""
+    "deletecss": "del-cli public/css",
+    "compile": "npm run deletecss && sass scss:public/css && tsc && node app/server.js",
+    "dev": "nodemon -e ts,scss  --exec \"npm run compile\""
   },
   "repository": {
     "type": "git",
@@ -22,10 +23,12 @@
     "express": "^4.17.1",
     "mongoose": "^5.12.5",
     "nodemon": "^2.0.7",
+    "sass": "^1.32.11",
     "typescript": "^4.2.4"
   },
   "devDependencies": {
     "@types/cors": "^2.8.10",
-    "@types/express": "^4.17.11"
+    "@types/express": "^4.17.11",
+    "del-cli": "^3.0.1"
   }
 }
