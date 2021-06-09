@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "deletecss": "del-cli public/css",
-    "compile": "npm run deletecss && sass scss:public/css && tsc && node app/server.js",
+    "compile": "npm run deletecss && sass scss:public/css && tsc --incremental && node app/server.js",
     "dev": "nodemon -e ts,scss  --exec \"npm run compile\""
   },
   "repository": {
