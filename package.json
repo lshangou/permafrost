@@ -6,8 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "deletecss": "del-cli public/css",
-    "compile": "npm run deletecss && sass scss:public/css && tsc --incremental && node app/server.js",
-    "dev": "nodemon -e ts,scss  --exec \"npm run compile\""
+    "compile": "sass scss:public/css --no-error-css && tsc --incremental && node app/server.js",
+    "dev": "nodemon -e ts  --exec \"npm run ts\" || exit 1",
+    "sass": "sass scss:public/css --no-error-css --watch",
+    "ts": "tsc --incremental && node app/server.js",
+    "start": "nodemon -e ts app/server.js --watch"
   },
   "repository": {
     "type": "git",
@@ -20,6 +23,7 @@
   },
   "homepage": "https://github.com/lshangou/permafrost#readme",
   "dependencies": {
+    "chokidar": "^3.5.1",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "mongoose": "^5.12.5",

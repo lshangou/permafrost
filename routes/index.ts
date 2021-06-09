@@ -5,6 +5,7 @@ import websiteRouter from './websiteRouter'
 import apiRouter from './api'
 
 export function setRoutes(app: Application) {
+  console.log("Defining routes...")
   app.use('/', websiteRouter)
   app.use('/api', apiRouter)
 }

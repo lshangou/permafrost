@@ -1,23 +1,32 @@
-<%- include('../includes/headCustomTitle', { title: 'Permafrost - Login' }) %>
+<%- include('../includes/customHead', { title: 'Permafrost - Login', styles: ['main'] }) %>
 <body>
-  <div id="login" class="login">
-    <div class="login__board">
-      <a href="#" style="position: absolute; color: #000; top: -30px; left: 0;">Voltar para o website</a>
-      <h1 class="login__board__title">Permafrost</h1>
-      <img class="login__board__title-bg-img" src="/static/images/transparent-logo.png" alt="Logo Permafrost">
-      <p class="login__board__text">Seja bem vindo(a). <br><br> Para se conectar, identifique-se abaixo.</p>
-      <img class="login__board__display-img" src="/static/images/entrance/entrance-image.png" alt="Personagem olhando para Montanhas, barcos e floresta.">
-      <form class="login__board__form">
-        <%- include('../components/input') %>
-        <p-input></p-input>
-        <div class="login__board__form__input-container">
-          <input id="password-input" class="login__board__form__input" name="password" placeholder="Senha..." type="password">
-          <a href="#" onclick="document.getElementById('password-input').type == 'text'?document.getElementById('password-input').type = 'password':document.getElementById('password-input').type = 'text'" class="login__board__form__input-button"></a>
-        </div>
-        <button class="login__board__form__button" type="submit">Fazer Login</button>
-        <a href="#" style="margin: 0 auto; margin-top: 8px; color: #fff;">Não possuo uma conta</a>
-      </form>
-    </div>
-  </div>
+  <form>
+    <input type="text" placeholder="email" id="email">
+    <input type="password" placeholder="password" id="password">
+    <a onclick="logIn(document.getElementById('email').value, document.getElementById('password').value)">Submit</a>
+  </form>
+  <p id="result"></p>
+  
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    function logIn(email, password) {
+      axios.post('/api/auth', {
+        email: email,
+        password: password
+      })
+      .then(res => {
+        if(res.data.type == "incorrectCredentials") {
+          document.getElementById("result").innerHTML = "E-mail ou senha inconrretos."
+        }else {
+          document.getElementById("result").innerHTML = "Autenticado com sucesso. Redirecionando..."
+        }
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
+  </script>
+
 </body>
 </html>
