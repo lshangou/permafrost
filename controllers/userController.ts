@@ -5,25 +5,50 @@ import { updatableUserProprieties, User, UserDocument, Users } from '../models/U
 export const userController = {
   // CRUD Functions
 
-  readAll: function(req: Request, res: Response) {
-    Users.find({}, (err: any, docs: UserDocument[]) => {
-      if(err) {
-        let alert: Alert = DefaultDatabaseAlert
-        console.log(err)
-        res.status(alert.status)
-        res.json(alert)
+  readAll: function(req: any, res: Response) {
+    if(req.user) {
+      if(req.user.permission >= 2) {
+        //needs to be admin
+        Users.find({}, (err: any, docs: UserDocument[]) => {
+          if(err) {
+            let alert: Alert = DefaultDatabaseAlert
+            console.log(err)
+            res.status(alert.status)
+            res.json(alert)
+          }else {
+            let alert: Alert = {
+              status: 200,
+              type: "successfulRequest",
+              message: "Success",
+              description: "User list gathered.",
+              data: docs
+            }
+            res.status(alert.status)
+            res.json(alert)
+          }
+        })
       }else {
         let alert: Alert = {
-          status: 200,
-          type: "successfulRequest",
-          message: "Success",
-          description: "User list gathered.",
-          data: docs
+          status: 401,
+          type: "noPermission",
+          message: "Unauthorized",
+          description: "User does not have authorization to gather this info.",
+          data: undefined
         }
         res.status(alert.status)
         res.json(alert)
       }
-    })
+    }else {
+      let alert: Alert = {
+        status: 401,
+        type: "noAuth",
+        message: "Unauthorized",
+        description: "User not logged in.",
+        data: undefined
+      }
+      res.status(alert.status)
+      res.json(alert)
+    }
   },
 
   create: function(req: Request, res: Response) {
@@ -68,71 +93,144 @@ export const userController = {
     })
   },
 
-  read: function(req: Request, res: Response) {
-    Users.findById(req.params.id, (err: any, doc: UserDocument) => {
-      if(err) {
-        let alert: Alert = DefaultDatabaseAlert
-        console.log(err)
-        res.status(alert.status)
-        res.json(alert)
+  read: function(req: any, res: Response) {
+    if(req.user) {
+      if(req.user.permission >= 2) {
+        //needs to be admin
+        Users.findById(req.params.id, (err: any, doc: UserDocument) => {
+          if(err) {
+            let alert: Alert = DefaultDatabaseAlert
+            console.log(err)
+            res.status(alert.status)
+            res.json(alert)
+          }else {
+            let alert: Alert = {
+              status: 200,
+              type: "successfulRequest",
+              message: "Success",
+              description: "User gathered.",
+              data: doc
+            }
+            res.status(alert.status)
+            res.json(alert)
+          }
+        })
       }else {
         let alert: Alert = {
-          status: 200,
-          type: "successfulRequest",
-          message: "Success",
-          description: "User gathered.",
-          data: doc
+          status: 401,
+          type: "noPermission",
+          message: "Unauthorized",
+          description: "User does not have authorization to gather this info.",
+          data: undefined
         }
         res.status(alert.status)
         res.json(alert)
       }
-    })
+    }else {
+      let alert: Alert = {
+        status: 401,
+        type: "noAuth",
+        message: "Unauthorized",
+        description: "User not logged in.",
+        data: undefined
+      }
+      res.status(alert.status)
+      res.json(alert)
+    }
   },
 
-  update: function(req: Request, res: Response) {
-    let updatableItens: updatableUserProprieties = {}
-    if(req.body.name) { updatableItens.name = req.body.name }
-    if(req.body.email) { updatableItens.email = req.body.email }
-    if(req.body.password) { updatableItens.password = req.body.password }
-    Users.findByIdAndUpdate( { _id: req.params.id }, updatableItens, null, (err: any, doc: any) => {
-      if(err) {
-        let alert: Alert = DefaultDatabaseAlert
-        console.log(err)
-        res.status(alert.status)
-        res.json(alert)
+  update: function(req: any, res: Response) {
+    if(req.user) {
+      if(req.user.permission >= 2) {
+        let updatableItens: updatableUserProprieties = {}
+        if(req.body.name) { updatableItens.name = req.body.name }
+        if(req.body.email) { updatableItens.email = req.body.email }
+        if(req.body.password) { updatableItens.password = req.body.password }
+        Users.findByIdAndUpdate( { _id: req.params.id }, updatableItens, null, (err: any, doc: any) => {
+          if(err) {
+            let alert: Alert = DefaultDatabaseAlert
+            console.log(err)
+            res.status(alert.status)
+            res.json(alert)
+          }else {
+            let alert: Alert = {
+              status: 200,
+              type: "successfulRequest",
+              message: "Success",
+              description: "User " + doc.id + " updated.",
+              data: doc
+            }
+            res.status(alert.status)
+            res.json(alert)
+          }
+        })
       }else {
         let alert: Alert = {
-          status: 200,
-          type: "successfulRequest",
-          message: "Success",
-          description: "User " + doc.id + " updated.",
-          data: doc
+          status: 401,
+          type: "noPermission",
+          message: "Unauthorized",
+          description: "User does not have authorization to gather this info.",
+          data: undefined
         }
         res.status(alert.status)
         res.json(alert)
       }
-    });
+    }else {
+      let alert: Alert = {
+        status: 401,
+        type: "noAuth",
+        message: "Unauthorized",
+        description: "User not logged in.",
+        data: undefined
+      }
+      res.status(alert.status)
+      res.json(alert)
+    }
   },
 
-  delete: function(req: Request, res: Response) {
-    Users.findByIdAndDelete( { _id: req.params.id }, null, (err: any, doc: any) => {
-      if(err) {
-        let alert: Alert = DefaultDatabaseAlert
-        console.log(err)
-        res.status(alert.status)
-        res.json(alert)
+  delete: function(req: any, res: Response) {
+    if(req.user) {
+      if(req.user.permission >= 2) {
+        Users.findByIdAndDelete( { _id: req.params.id }, null, (err: any, doc: any) => {
+          if(err) {
+            let alert: Alert = DefaultDatabaseAlert
+            console.log(err)
+            res.status(alert.status)
+            res.json(alert)
+          }else {
+            let alert: Alert = {
+              status: 200,
+              type: "successfulRequest",
+              message: "Success",
+              description: "User " + doc.name + " deleted.",
+              data: doc
+            }
+            res.status(alert.status)
+            res.json(alert)
+          }
+        })
       }else {
         let alert: Alert = {
-          status: 200,
-          type: "successfulRequest",
-          message: "Success",
-          description: "User " + doc.name + " deleted.",
-          data: doc
+          status: 401,
+          type: "noPermission",
+          message: "Unauthorized",
+          description: "User does not have authorization to gather this info.",
+          data: undefined
         }
         res.status(alert.status)
         res.json(alert)
       }
-    })
+    }else {
+      let alert: Alert = {
+        status: 401,
+        type: "noAuth",
+        message: "Unauthorized",
+        description: "User not logged in.",
+        data: undefined
+      }
+      res.status(alert.status)
+      res.json(alert)
+    }
   }
 
 } 

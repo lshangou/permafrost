@@ -18,18 +18,18 @@ export const authCheckMiddleware = (req: any, res: Response, next: NextFunction)
         if(doc) {
           user = doc
           req.user = user
-          console.log("User " + req.user.name +" acessing /" + req.baseUrl)
+          console.log("User " + req.user.name +" acessing " + req.originalUrl)
           next()
         } else {
           req.user = undefined
-          console.log("Anonymous user acessing /" + req.baseUrl)
+          console.log("Anonymous user acessing " + req.originalUrl)
           next()
         }
       }
     })
   }else {
     req.user = undefined
-    console.log("Anonymous user acessing /" + req.baseUrl)
+    console.log("Anonymous user acessing " + req.originalUrl)
     next()
   }
 }
