@@ -124,6 +124,55 @@ export const authController = {
       res.clearCookie('userCookie')
       res.clearCookie('userEmail')
     }
+  },
+
+  logoutAll: function(req: Request, res: Response) {
+    if(req.cookies) {
+      Users.findOne({email: req.cookies.userEmail}, (err: any, doc: UserDocument) => {
+        if(err) {
+          let alert: Alert = DefaultDatabaseAlert
+          console.log(err)
+          res.status(alert.status)
+          res.json(alert)
+        }else {
+          if(doc) {
+            let authSessionsUpdated: authSession[] = []
+            Users.findByIdAndUpdate({ _id: doc._id }, {authSessions: authSessionsUpdated}, null, (err: any, doc: any) => {
+              if(err) {
+                let alert: Alert = DefaultDatabaseAlert
+                console.log(err)
+                res.status(alert.status)
+                res.json(alert)
+              }else {
+                let alert: Alert = {
+                  status: 200,
+                  type: "successfulRequest",
+                  message: "Success",
+                  description: "User logged out.",
+                  data: doc
+                }
+                res.status(alert.status)
+                res.json(alert)
+              }
+            })
+          }else {
+            let alert: Alert = {
+              status: 404,
+              type: "notFound",
+              message: "Error",
+              description: "There is no user with this credentials, reseting cookies.",
+              data: doc
+            }
+            res.clearCookie('userCookie')
+            res.clearCookie('userEmail')
+            res.status(alert.status)
+            res.json(alert)
+          }
+        }
+      })
+      res.clearCookie('userCookie')
+      res.clearCookie('userEmail')
+    }
   }
 
 } 
