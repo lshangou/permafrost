@@ -2,17 +2,27 @@
 <body>
   <% if(user) { %>
     <p><%= user.name %> VOCE TA LOGADO AMIGO</p>
-    <a onclick="logOut()">Logout</a>
+    <button id="logoutSubmit">Logout</button>
   <% } %>
   <form>
     <input type="text" placeholder="email" id="email">
     <input type="password" placeholder="password" id="password">
-    <a onclick="logIn(document.getElementById('email').value, document.getElementById('password').value)">Submit</a>
+    <button id="loginSubmit">Submit</button>
   </form>
   <p id="result"></p>
   
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
+    document.getElementById('loginSubmit').addEventListener("click", function(e) {
+      e.preventDefault()
+      logIn(document.getElementById('email').value, document.getElementById('password').value)
+    })
+    if(document.getElementById('logoutSubmit')) {
+      document.getElementById('logoutSubmit').addEventListener("click", function(e) {
+        e.preventDefault()
+        logOut()
+      })
+    }
     function logIn(email, password) {
       axios({
         url: '/api/auth',
@@ -28,6 +38,7 @@
           document.getElementById("result").innerHTML = "E-mail ou senha inconrretos."
         }else {
           document.getElementById("result").innerHTML = "Autenticado com sucesso. Redirecionando..."
+          window.location = 'http://localhost:3000/login'
         }
         console.log(res)
       })
@@ -45,6 +56,7 @@
       .then(res => {
         if(res.data.type == 'successfulRequest') {
           console.log(res)
+          window.location = 'http://localhost:3000/login'
         }else {
           console.log(res)
         }
