@@ -1,5 +1,8 @@
 <%- include('../includes/customHead', { title: 'Permafrost - Login', styles: ['main'] }) %>
 <body>
+  <% if(user) { %>
+    <p><%= user.name %> VOCE TA LOGADO AMIGO</p>
+  <% } %>
   <form>
     <input type="text" placeholder="email" id="email">
     <input type="password" placeholder="password" id="password">
@@ -10,10 +13,19 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
     function logIn(email, password) {
-      axios.post('/api/auth', {
-        email: email,
-        password: password
+      axios({
+        url: '/api/auth',
+        method: 'post',
+        data: {
+          email: email,
+          password: password
+        },
+        withCredentials: true
       })
+      // axios.post('/api/auth', {
+      //   email: email,
+      //   password: password
+      // })
       .then(res => {
         if(res.data.type == "incorrectCredentials") {
           document.getElementById("result").innerHTML = "E-mail ou senha inconrretos."

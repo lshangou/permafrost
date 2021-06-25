@@ -1,25 +1,35 @@
 import { Request, Response, NextFunction } from 'express'
-import { User } from '../models/User'
+import { Alert, DefaultDatabaseAlert } from '../helpers/Alert'
+import { User, UserDocument, Users } from '../models/User'
 
 export const authCheckMiddleware = (req: any, res: Response, next: NextFunction) => {
 
   // TODO: Check auth function
-  // let user: User = {
-  //   name: "Lucas",
-  //   email: "lucas@email.com",
-  //   password: "123",
-  //   permission: 1
-  // }
   let user = null
-
-  if(user) {
-    req.user = user
-    // console.log("Usuário " + req.user.name +" acessando a rota /" + req.baseUrl)
-  } else {
-    req.user = {}
-    // console.log("Usuário desconhecido acessando a rota /" + req.baseUrl)
+  if(req.cookies.userCookie && req.cookies.userEmail) {
+    //Check if the cookie is valid
+    Users.findOne({email: req.cookies.userEmail}, (err: any, doc: UserDocument) => {
+      if(err) {
+        let alert: Alert = DefaultDatabaseAlert
+        console.log(err)
+        res.status(alert.status)
+        res.json(alert)
+      }else {
+        if(doc) {
+          user = doc
+          req.user = user
+          console.log("User " + req.user.name +" acessing /" + req.baseUrl)
+          next()
+        } else {
+          req.user = undefined
+          console.log("Anonymous user acessing /" + req.baseUrl)
+          next()
+        }
+      }
+    })
+  }else {
+    req.user = undefined
+    console.log("Anonymous user acessing /" + req.baseUrl)
+    next()
   }
-
-
-  next()
 }

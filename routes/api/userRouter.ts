@@ -4,22 +4,16 @@ const userRouter = express.Router()
 
 // Add operations here
 
-userRouter.get('/', (req: Request, res: Response) => {
-  userController.readAll(req, res)
-})
-userRouter.post('/create', (req: Request, res: Response) => {
-  userController.create(req, res)
-})
-userRouter.put('/update/:id', (req: Request, res: Response) => {
-  userController.update(req, res)
-})
-userRouter.delete('/delete/:id', (req: Request, res: Response) => {
-  userController.delete(req, res)
-})
+// Old way
+// userRouter.get('/', (req: Request, res: Response) => {
+//   userController.readAll(req, res)
+// })
+userRouter.get('/', userController.readAll)
+userRouter.post('/create', userController.create)
+userRouter.put('/update/:id', userController.update)
+userRouter.delete('/delete/:id', userController.delete)
 //Last one, since id is not a recognizable word.
-userRouter.get('/:id', (req: Request, res: Response) => {
-  userController.read(req, res)
-})
+userRouter.get('/:id', userController.read)
 
 //
 

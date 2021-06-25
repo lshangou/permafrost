@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 export const connectDatabase = function(url: string) {
+  mongoose.set('useFindAndModify', false);
   mongoose.connect(url + '/permafrost?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 
   const db = mongoose.connection

@@ -14,15 +14,47 @@ export const authController = {
         res.json(alert)
       }else {
         if(doc) {
-          let alert: Alert = {
-            status: 200,
-            type: "successfulRequest",
-            message: "Success",
-            description: "User auth complete.",
-            data: doc
+          // Create new Cookie for login, expiring in one month
+          let cookie = req.cookies.userCookie
+          let authSessionsUpdated = []
+          doc.authSessions.forEach(authSession => {
+            if(authSession.cookie != cookie) {
+              authSessionsUpdated.push(authSession)
+            }
+          });
+          var randomNumber=Math.random().toString();
+          randomNumber=randomNumber.substring(2,randomNumber.length);
+          let expirationDate = new Date(Date.now() + 30 * 24 * 3600000)
+          let userAgent = req.get('User-Agent')
+          if(!userAgent) {
+            userAgent = 'undefined'
           }
-          res.status(alert.status)
-          res.json(alert)
+          res.cookie('userCookie', randomNumber, { expires: expirationDate, httpOnly: true }) //30 24h days
+          .cookie('userEmail', doc.email, { expires: expirationDate, httpOnly: true })
+          authSessionsUpdated.push({
+            cookie: randomNumber,
+            expirationDate: expirationDate.toString(),
+            userDevice: userAgent
+          })
+          Users.findByIdAndUpdate({ _id: doc._id }, {authSessions: authSessionsUpdated}, null, (err: any, doc: any) => {
+            // console.log(doc)
+            if(err) {
+              let alert: Alert = DefaultDatabaseAlert
+              console.log(err)
+              res.status(alert.status)
+              res.json(alert)
+            }else {
+              let alert: Alert = {
+                status: 200,
+                type: "successfulRequest",
+                message: "Success",
+                description: "User auth complete.",
+                data: doc
+              }
+              res.status(alert.status)
+              res.json(alert)
+            }
+          })
         }else {
           let alert: Alert = {
             status: 202,

@@ -3,10 +3,8 @@ import { authController } from '../../controllers/authController'
 const authRouter = express.Router()
 
 // Add operations here
-
-authRouter.post('/', (req: Request, res: Response) => {
-  authController.auth(req, res)
-})
+authRouter.post('/', authController.auth)
+//TODO: Add a logout from all machines, witch deletes all cokies.
 
 //
 
