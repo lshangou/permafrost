@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express'
 import { authCheckMiddleware } from '../../middleware/authCheckMiddleware'
 import authRouter from './authRouter'
 import userRouter from './userRouter'
+import categoryRouter from './categoryRouter'
 
 const apiRouter = express.Router()
 
@@ -13,8 +14,9 @@ apiRouter.get('/', (req: Request, res: Response) => {
 
 // Add routes here
 //apiRouter.use(path, routerFile)
-apiRouter.use('/user', userRouter)
 apiRouter.use('/auth', authRouter)
+apiRouter.use('/user', userRouter)
+apiRouter.use('/category', categoryRouter)
 
 //
 

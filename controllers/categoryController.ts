@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
 import { Alert, DefaultDatabaseAlert } from '../helpers/Alert'
-import { updatableUserProprieties, User, UserDocument, Users } from '../models/User';
+import { Categories, Category, CategoryDocument, updatableCategoryProprieties } from '../models/Category';
 
-export const userController = {
+export const categoryController = {
   // CRUD Functions
 
   readAll: function(req: any, res: Response) {
     if(req.user) {
       if(req.user.permission >= 2) {
         //needs to be admin
-        Users.find({}, (err: any, docs: UserDocument[]) => {
+        Categories.find({}, (err: any, docs: CategoryDocument[]) => {
           if(err) {
             let alert: Alert = DefaultDatabaseAlert
             console.log(err)
@@ -20,7 +20,7 @@ export const userController = {
               status: 200,
               type: "successfulRequest",
               message: "Success",
-              description: "User list gathered.",
+              description: "Category list gathered.",
               data: docs
             }
             res.status(alert.status)
@@ -52,8 +52,8 @@ export const userController = {
   },
 
   create: function(req: Request, res: Response) {
-    let newUser = new User(req.body.name, req.body.email, req.body.password, 0)
-    Users.find( { email: newUser.email }, (err: any, doc: UserDocument[]) => {
+    let newCategory = new Category(req.body.name, req.body.color)
+    Categories.find( { name: newCategory.name }, (err: any, doc: CategoryDocument[]) => {
       if(err) {
         let alert: Alert = DefaultDatabaseAlert
         console.log(err)
@@ -63,26 +63,25 @@ export const userController = {
       }else if(doc.length > 0) {
         let alert: Alert = {
           status: 400,
-          type: "duplicatedEmail",
+          type: "duplicatedName",
           message: "Client Error",
-          description: "The e-mail request is already registered in our database."
+          description: "The category request is already registered in our database."
         }
         res.status(alert.status)
         res.json(alert)
       }else {
-        Users.create(newUser, (err: any, doc: UserDocument) => {
+        Categories.create(newCategory, (err: any, doc: CategoryDocument) => {
           if(err) {
             let alert: Alert = DefaultDatabaseAlert
             console.log(err)
             res.status(alert.status)
             res.json(alert)
           }else {
-            doc.password = "Who knows? 🤷‍♀️"
             let alert: Alert = {
               status: 200,
               type: "successfulRequest",
               message: "Success",
-              description: "User " + newUser.name + " successfully registered.",
+              description: "Category " + newCategory.name + " successfully registered.",
               data: doc
             }
             res.status(alert.status)
@@ -97,7 +96,7 @@ export const userController = {
     if(req.user) {
       if(req.user.permission >= 2) {
         //needs to be admin
-        Users.findById(req.params.id, (err: any, doc: UserDocument) => {
+        Categories.findById(req.params.id, (err: any, doc: CategoryDocument) => {
           if(err) {
             let alert: Alert = DefaultDatabaseAlert
             console.log(err)
@@ -109,7 +108,7 @@ export const userController = {
                 status: 200,
                 type: "successfulRequest",
                 message: "Success",
-                description: "User gathered.",
+                description: "Category gathered.",
                 data: doc
               }
               res.status(alert.status)
@@ -119,7 +118,7 @@ export const userController = {
                 status: 404,
                 type: "notFound",
                 message: "Error",
-                description: "User not Found.",
+                description: "Category not Found.",
                 data: doc
               }
               res.status(alert.status)
@@ -154,11 +153,10 @@ export const userController = {
   update: function(req: any, res: Response) {
     if(req.user) {
       if(req.user.permission >= 2) {
-        let updatableItens: updatableUserProprieties = {}
+        let updatableItens: updatableCategoryProprieties = {}
         if(req.body.name) { updatableItens.name = req.body.name }
-        if(req.body.email) { updatableItens.email = req.body.email }
-        if(req.body.password) { updatableItens.password = req.body.password }
-        Users.findByIdAndUpdate( { _id: req.params.id }, updatableItens, null, (err: any, doc: any) => {
+        if(req.body.color) { updatableItens.color = req.body.color }
+        Categories.findByIdAndUpdate( { _id: req.params.id }, updatableItens, null, (err: any, doc: any) => {
           if(err) {
             let alert: Alert = DefaultDatabaseAlert
             console.log(err)
@@ -169,7 +167,7 @@ export const userController = {
               status: 200,
               type: "successfulRequest",
               message: "Success",
-              description: "User " + doc.id + " updated.",
+              description: "Category " + doc.id + " updated.",
               data: doc
             }
             res.status(alert.status)
@@ -203,7 +201,7 @@ export const userController = {
   delete: function(req: any, res: Response) {
     if(req.user) {
       if(req.user.permission >= 2) {
-        Users.findByIdAndDelete( { _id: req.params.id }, null, (err: any, doc: any) => {
+        Categories.findByIdAndDelete( { _id: req.params.id }, null, (err: any, doc: any) => {
           if(err) {
             let alert: Alert = DefaultDatabaseAlert
             console.log(err)
@@ -214,7 +212,7 @@ export const userController = {
               status: 200,
               type: "successfulRequest",
               message: "Success",
-              description: "User " + doc.name + " deleted.",
+              description: "Category " + doc.name + " deleted.",
               data: doc
             }
             res.status(alert.status)
