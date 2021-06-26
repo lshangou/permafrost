@@ -165,15 +165,27 @@ export const userController = {
             res.status(alert.status)
             res.json(alert)
           }else {
-            let alert: Alert = {
-              status: 200,
-              type: "successfulRequest",
-              message: "Success",
-              description: "User " + doc.id + " updated.",
-              data: doc
+            if(doc) {
+              let alert: Alert = {
+                status: 200,
+                type: "successfulRequest",
+                message: "Success",
+                description: "User " + doc.id + " updated.",
+                data: doc
+              }
+              res.status(alert.status)
+              res.json(alert)
+            }else {
+              let alert: Alert = {
+                status: 404,
+                type: "notFound",
+                message: "Error",
+                description: "User not Found.",
+                data: doc
+              }
+              res.status(alert.status)
+              res.json(alert)
             }
-            res.status(alert.status)
-            res.json(alert)
           }
         })
       }else {
@@ -210,15 +222,27 @@ export const userController = {
             res.status(alert.status)
             res.json(alert)
           }else {
-            let alert: Alert = {
-              status: 200,
-              type: "successfulRequest",
-              message: "Success",
-              description: "User " + doc.name + " deleted.",
-              data: doc
+            if(doc) {
+              let alert: Alert = {
+                status: 200,
+                type: "successfulRequest",
+                message: "Success",
+                description: "User " + doc.name + " deleted.",
+                data: doc
+              }
+              res.status(alert.status)
+              res.json(alert)
+            }else {
+              let alert: Alert = {
+                status: 404,
+                type: "notFound",
+                message: "Error",
+                description: "User not Found.",
+                data: doc
+              }
+              res.status(alert.status)
+              res.json(alert)
             }
-            res.status(alert.status)
-            res.json(alert)
           }
         })
       }else {
