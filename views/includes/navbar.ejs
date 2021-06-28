@@ -1,0 +1,58 @@
+<header>
+  <div class="main-bar">
+    <div class="logo-container">
+      <img src="/static/images/navbar/logo.png" alt="Permafrost">
+    </div>
+    <div class="nav-container">
+      <button class="dark primary <%= page == 'Home'?'active':'' %>">Home</button>
+      <% if(user) { %>
+        <% if(user.permission >= 1) { %>
+          <button class="dark primary <%= page == 'Panel'?'active':'' %>">Panel</button>
+        <% } %>
+      <% } %>
+      <button class="dark dark-outline <%= page == 'Entrance'?'active':'' %>">Log In</button>
+    </div>
+  </div>
+  <div class="sub-bar">
+    <div class="breadcrumb">
+      <span><%= path %> <span class="page"><%= page %></span></span>
+    </div>
+    <div class="user-info">
+      <% if(user) { %>
+        <div>
+          <img src="/static/images/navbar/user-icon.png" alt="Ícone de Usuário">
+          Seja bem vindo, <%= user.name %>!
+          <a id="disconnect">Desconectar</a>
+        </div>
+      <% } else { %>
+        <div>
+          <img src="/static/images/navbar/user-icon.png" alt="Ícone de Usuário">
+          Desconectado
+        </div>
+      <% } %>
+    </div>
+  </div>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    let disconnectButton = document.querySelector('#disconnect')
+    if(disconnectButton) {
+      disconnectButton.addEventListener('click', e => {
+        e.preventDefault()
+        axios({
+          url: '/api/auth/logout',
+          method: 'post',
+          data: {},
+          withCredentials: true
+        })
+        .then(res => {
+          if(res.data.type == 'successfulRequest') {
+            document.location.reload(true);
+          }else {
+            alert('Ocorreu um erro.')
+            window.location('http:localhost:3000/entrance')
+          }
+        })
+      })
+    }
+  </script>
+</header>

@@ -42,6 +42,71 @@
   font-family: "Fantasque-Sans";
   src: url(../fonts/FantasqueSansMono-Regular.ttf);
 }
+@font-face {
+  font-family: "Hind-Bold";
+  src: url(../fonts/Hind-Bold.ttf);
+}
+@font-face {
+  font-family: "Hind-Light";
+  src: url(../fonts/Hind-Light.ttf);
+}
+@font-face {
+  font-family: "Hind-Medium";
+  src: url(../fonts/Hind-Medium.ttf);
+}
+@font-face {
+  font-family: "Hind-Regular";
+  src: url(../fonts/Hind-Regular.ttf);
+}
+@font-face {
+  font-family: "Hind-SemiBold";
+  src: url(../fonts/Hind-SemiBold.ttf);
+}
+header .main-bar {
+  background-color: #205741;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header .main-bar .logo-container {
+  align-items: center;
+  display: flex;
+}
+header .main-bar .logo-container img {
+  max-width: 196px;
+  max-height: 48px;
+}
+header .main-bar .nav-container button {
+  margin-left: 32px;
+}
+header .sub-bar {
+  background-color: #F0F0F0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 32px;
+  font-size: 14px;
+  font-family: "Hind-Light";
+  box-shadow: 0 4px 4px #00000040;
+}
+header .sub-bar .breadcrumb span .page {
+  text-decoration: underline;
+}
+header .sub-bar .user-info div {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+header .sub-bar .user-info div img {
+  margin-right: 8px;
+}
+header .sub-bar .user-info div a {
+  margin-left: 8px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .list-block {
   background-color: red;
 }
@@ -49,6 +114,35 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: "Hind-Regular";
+}
+body.dark {
+  background-color: #48433F;
+}
+body.light {
+  background-color: #F5F5F5;
+}
+
+button {
+  cursor: pointer;
+  padding: 3px 32px;
+  border-radius: 4px;
+  outline: 0;
+  border: 0;
+  font-size: 21px;
+  font-family: "Hind-Medium";
+  box-shadow: 0;
+}
+button.dark {
+  color: #F0F0F0;
+  background-color: #205741;
+}
+button.dark-outline {
+  background-color: transparent !important;
+  border: 2px solid #F0F0F0;
+}
+button.active {
+  box-shadow: 0 4px 4px #00000040;
 }
 
 /*# sourceMappingURL=main.css.map */

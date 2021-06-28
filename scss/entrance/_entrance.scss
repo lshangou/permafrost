@@ -1,0 +1,54 @@
+header {
+  .main-bar {
+    background-color: $primary;
+    padding: 16px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .logo-container {
+      align-items: center;
+      display: flex;
+      img {
+        max-width: 196px;
+        max-height: 48px;
+      }
+    }
+    .nav-container {
+      button {
+        margin-left: 32px;
+      }
+    }
+  }
+  .sub-bar {
+    background-color: $half;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 32px;
+    font-size: 14px;
+    font-family: 'Hind-Light';
+    box-shadow: $box-shadow;
+    .breadcrumb {
+      span {
+        .page {
+          text-decoration: underline;
+        }
+      }
+    }
+    .user-info {
+      div {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        img {
+          margin-right: 8px;
+        }
+        a {
+          margin-left: 8px;
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

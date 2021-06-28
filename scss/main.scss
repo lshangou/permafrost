@@ -7,4 +7,33 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: 'Hind-Regular';
+  &.dark {
+    background-color: $dark-bg;
+  }
+  &.light {
+    background-color: $light-bg;
+  }
+}
+
+button {
+  cursor: pointer;
+  padding: 3px 32px;
+  border-radius: $border-radius;
+  outline: 0;
+  border: 0;
+  font-size: 21px;
+  font-family: 'Hind-Medium';
+  box-shadow: 0;
+  &.dark {
+    color: $dark-text;
+    background-color: $primary;
+    &-outline {
+      background-color: transparent !important;
+      border: 2px solid $dark-text;
+    }
+  }
+  &.active {
+    box-shadow: $box-shadow;
+  }
 }
