@@ -2,7 +2,9 @@
 <body>
   <%- include('./components/permafrost_mtg/header') %>
   Home teste
-  <pre><%= user.name %></pre>
+  <% if(user) { %>
+    <pre><%= user.name %></pre>
+  <% } %>
   <%- include('./components/permafrost_mtg/list-block') %>
 </body>
 </html>

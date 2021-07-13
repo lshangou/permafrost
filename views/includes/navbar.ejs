@@ -20,14 +20,14 @@
     <div class="user-info">
       <% if(user) { %>
         <div>
-          <img src="/static/images/navbar/user-icon.png" alt="Ícone de Usuário">
-          Seja bem vindo, <%= user.name %>!
+          <img src="/static/images/navbar/user-icon.png" alt="User Icon">
+          Welcome, <%= user.name %>!
           <a id="disconnect">Desconectar</a>
         </div>
       <% } else { %>
         <div>
-          <img src="/static/images/navbar/user-icon.png" alt="Ícone de Usuário">
-          Desconectado
+          <img src="/static/images/navbar/user-icon.png" alt="User Icon">
+          Disconnected
         </div>
       <% } %>
     </div>
@@ -48,7 +48,7 @@
           if(res.data.type == 'successfulRequest') {
             document.location.reload(true);
           }else {
-            alert('Ocorreu um erro.')
+            alert('Error.')
             window.location('http:localhost:3000/entrance')
           }
         })

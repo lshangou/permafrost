@@ -18,11 +18,11 @@ body {
 
 button {
   cursor: pointer;
-  padding: 3px 32px;
+  padding: 3px 28px 2px;
   border-radius: $border-radius;
   outline: 0;
   border: 0;
-  font-size: 21px;
+  font-size: 18px;
   font-family: 'Hind-Medium';
   box-shadow: 0;
   &.dark {

@@ -64,7 +64,7 @@
 }
 header .main-bar {
   background-color: #205741;
-  padding: 16px 32px;
+  padding: 10px 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -125,11 +125,11 @@ body.light {
 
 button {
   cursor: pointer;
-  padding: 3px 32px;
+  padding: 3px 28px 2px;
   border-radius: 4px;
   outline: 0;
   border: 0;
-  font-size: 21px;
+  font-size: 18px;
   font-family: "Hind-Medium";
   box-shadow: 0;
 }
