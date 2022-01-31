@@ -1,16 +1,16 @@
-<header>
+<header class="<%= theme %>">
   <div class="main-bar">
     <div class="logo-container">
       <img src="/static/images/navbar/logo.png" alt="Permafrost">
     </div>
     <div class="nav-container">
-      <button class="dark primary <%= page == 'Home'?'active':'' %>">Home</button>
+      <a class="btn dark primary <%= page == 'Home'?'active':'' %>">Home</a>
       <% if(user) { %>
         <% if(user.permission >= 1) { %>
-          <button class="dark primary <%= page == 'Panel'?'active':'' %>">Panel</button>
+          <a class="btn dark primary <%= page == 'Panel'?'active':'' %>">Panel</a>
         <% } %>
       <% } %>
-      <button class="dark dark-outline <%= page == 'Entrance'?'active':'' %>">Log In</button>
+      <a href="/login" class="btn dark dark-outline <%= page == 'Entrance'?'active':'' %>">Log In</a>
     </div>
   </div>
   <div class="sub-bar">
@@ -20,14 +20,17 @@
     <div class="user-info">
       <% if(user) { %>
         <div>
-          <img src="/static/images/navbar/user-icon.png" alt="User Icon">
+          <img class="user" src="/static/images/navbar/user-icon.png" alt="User Icon">
           Welcome, <%= user.name %>!
-          <a id="disconnect">Desconectar</a>
+          <a id="disconnect">
+            <span>Disconnect</span>
+            <img class="log-out" src="/static/images/navbar/log-out-icon.png" alt="Disconnect Icon">
+          </a>
         </div>
       <% } else { %>
         <div>
-          <img src="/static/images/navbar/user-icon.png" alt="User Icon">
-          Disconnected
+          <img class="user" src="/static/images/navbar/user-icon.png" alt="User Icon">
+          Disconnected.
         </div>
       <% } %>
     </div>

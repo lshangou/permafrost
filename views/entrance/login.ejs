@@ -1,9 +1,6 @@
 <%- include('../includes/customHead', { title: 'Permafrost - Login', styles: ['main'] }) %>
 <body>
-  <% if(user) { %>
-    <p><%= user.name %> VOCE TA LOGADO AMIGO</p>
-    <button id="logoutSubmit">Logout</button>
-  <% } %>
+  <%- include('../includes/header', { path: 'Permafrost /', page: 'Login', theme: 'default'}) %>
   <form>
     <input type="text" placeholder="email" id="email">
     <input type="password" placeholder="password" id="password">

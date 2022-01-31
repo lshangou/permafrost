@@ -23,51 +23,77 @@
   src: url(../fonts/CrimsonText-SemiBoldItalic.ttf);
 }
 @font-face {
-  font-family: "Ubuntu-Bold";
-  src: url(../fonts/Ubuntu-Bold.ttf);
-}
-@font-face {
-  font-family: "Ubuntu-Italic";
-  src: url(../fonts/Ubuntu-Italic.ttf);
-}
-@font-face {
-  font-family: "Ubuntu-Regular";
-  src: url(../fonts/Ubuntu-Regular.ttf);
-}
-@font-face {
-  font-family: "Ubuntu-Light";
-  src: url(../fonts/Ubuntu-Light.ttf);
-}
-@font-face {
   font-family: "Fantasque-Sans";
   src: url(../fonts/FantasqueSansMono-Regular.ttf);
 }
 @font-face {
-  font-family: "Hind-Bold";
-  src: url(../fonts/Hind-Bold.ttf);
+  font-family: "SourceSansPro-Black";
+  src: url(../fonts/SourceSansPro-Black.ttf);
 }
 @font-face {
-  font-family: "Hind-Light";
-  src: url(../fonts/Hind-Light.ttf);
+  font-family: "SourceSansPro-BlackItalic";
+  src: url(../fonts/SourceSansPro-BlackItalic.ttf);
 }
 @font-face {
-  font-family: "Hind-Medium";
-  src: url(../fonts/Hind-Medium.ttf);
+  font-family: "SourceSansPro-Bold";
+  src: url(../fonts/SourceSansPro-Bold.ttf);
 }
 @font-face {
-  font-family: "Hind-Regular";
-  src: url(../fonts/Hind-Regular.ttf);
+  font-family: "SourceSansPro-BoldItalic";
+  src: url(../fonts/SourceSansPro-BoldItalic.ttf);
 }
 @font-face {
-  font-family: "Hind-SemiBold";
-  src: url(../fonts/Hind-SemiBold.ttf);
+  font-family: "SourceSansPro-ExtraLight";
+  src: url(../fonts/SourceSansPro-ExtraLight.ttf);
+}
+@font-face {
+  font-family: "SourceSansPro-ExtraLightItalic";
+  src: url(../fonts/SourceSansPro-ExtraLightItalic.ttf);
+}
+@font-face {
+  font-family: "SourceSansPro-Italic";
+  src: url(../fonts/SourceSansPro-Italic.ttf);
+}
+@font-face {
+  font-family: "SourceSansPro-Light";
+  src: url(../fonts/SourceSansPro-Light.ttf);
+}
+@font-face {
+  font-family: "SourceSansPro-LightItalic";
+  src: url(../fonts/SourceSansPro-LightItalic.ttf);
+}
+@font-face {
+  font-family: "SourceSansPro-Regular";
+  src: url(../fonts/SourceSansPro-Regular.ttf);
+}
+@font-face {
+  font-family: "SourceSansPro-SemiBold";
+  src: url(../fonts/SourceSansPro-SemiBold.ttf);
+}
+@font-face {
+  font-family: "SourceSansPro-SemiBoldItalic";
+  src: url(../fonts/SourceSansPro-SemiBoldItalic.ttf);
 }
 header .main-bar {
-  background-color: #205741;
+  background-color: #292929;
+  background-image: linear-gradient(90deg, #292929 50%, #4A4A4A 50%);
+  position: relative;
   padding: 10px 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+header .main-bar::before {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 68px;
+  left: calc(50% - 60px);
+  top: 0;
+  background-color: transparent;
+  background-image: url("/static/images/navbar/default-triangle.png");
+  background-size: cover;
+  background-position: bottom;
 }
 header .main-bar .logo-container {
   align-items: center;
@@ -77,7 +103,8 @@ header .main-bar .logo-container img {
   max-width: 196px;
   max-height: 48px;
 }
-header .main-bar .nav-container button {
+header .main-bar .nav-container a.btn {
+  font-family: "SourceSansPro-Regular";
   margin-left: 32px;
 }
 header .sub-bar {
@@ -87,7 +114,7 @@ header .sub-bar {
   align-items: center;
   padding: 4px 32px;
   font-size: 14px;
-  font-family: "Hind-Light";
+  font-family: "SourceSansPro-Light";
   box-shadow: 0 4px 4px #00000040;
 }
 header .sub-bar .breadcrumb span .page {
@@ -98,13 +125,22 @@ header .sub-bar .user-info div {
   align-items: center;
   justify-content: space-around;
 }
-header .sub-bar .user-info div img {
+header .sub-bar .user-info div img.user {
   margin-right: 8px;
+  margin-bottom: 2px;
+}
+header .sub-bar .user-info div img.log-out {
+  margin-left: 8px;
+  width: 14px;
+  height: 13px;
+  margin-bottom: 2px;
 }
 header .sub-bar .user-info div a {
   margin-left: 8px;
   text-decoration: underline;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .list-block {
@@ -114,34 +150,41 @@ header .sub-bar .user-info div a {
 body {
   margin: 0;
   padding: 0;
-  font-family: "Hind-Regular";
+  font-family: "SourceSansPro-Regular";
 }
 body.dark {
-  background-color: #48433F;
+  background-color: #292929;
 }
 body.light {
   background-color: #F5F5F5;
 }
 
-button {
+a.btn {
   cursor: pointer;
   padding: 3px 28px 2px;
   border-radius: 4px;
   outline: 0;
   border: 0;
   font-size: 18px;
-  font-family: "Hind-Medium";
+  font-family: "CrimsonText-Regular";
   box-shadow: 0;
+  text-decoration: none;
 }
-button.dark {
+a.btn.dark {
   color: #F0F0F0;
-  background-color: #205741;
+  background-color: #DFBE53;
 }
-button.dark-outline {
+a.btn.dark:hover {
+  background-color: #dbb63e;
+}
+a.btn.dark-outline {
   background-color: transparent !important;
   border: 2px solid #F0F0F0;
 }
-button.active {
+a.btn.dark-outline:hover {
+  background-color: #dbb63e !important;
+}
+a.btn.active {
   box-shadow: 0 4px 4px #00000040;
 }
 
