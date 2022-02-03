@@ -4,13 +4,17 @@
       <img src="/static/images/navbar/logo.png" alt="Permafrost">
     </div>
     <div class="nav-container">
-      <a class="btn dark primary <%= page == 'Home'?'active':'' %>">Home</a>
+      <a href="/" class="nav-link <%= page == 'Home'?'active':'' %>">Home</a>
+      <a href="/sobre" class="nav-link <%= page == 'About'?'active':'' %>">Sobre</a>
       <% if(user) { %>
         <% if(user.permission >= 1) { %>
-          <a class="btn dark primary <%= page == 'Panel'?'active':'' %>">Panel</a>
+          <a class="btn nav-link dark <%= page == 'Panel'?'active':'' %>">Painel</a>
         <% } %>
       <% } %>
-      <a href="/login" class="btn dark dark-outline <%= page == 'Entrance'?'active':'' %>">Log In</a>
+      <% if(!user) { %>
+      <a href="/login" class="btn nav-link dark <%= page == 'Entrance'?'active':'' %>">Fazer Login</a>
+      <% } %>
+      <a class="btn side-menu-button dark">Menu</a>
     </div>
   </div>
   <div class="sub-bar">

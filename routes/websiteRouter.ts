@@ -11,13 +11,14 @@ websiteRouter.get('/', (req: Request, res: Response) => {
 websiteRouter.get('/login', (req: Request, res: Response) => {
   pageController.render(req, res, 'entrance/login')
 })
-websiteRouter.get('/entrance', (req: Request, res: Response) => {
-  pageController.render(req, res, 'entrance')
-})
 
 websiteRouter.get('/about', (req: Request, res: Response) => {
   res.send("About Page. I'm in an website route (/about)")
 })
+
+websiteRouter.get('*', function(req, res){
+  pageController.render(req, res, '404')
+});
 
 
 //

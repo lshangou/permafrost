@@ -16,18 +16,6 @@ app.set('view engine', 'ejs');
 
 app.use('/static', express.static('public'));
 
-// Chockidar watcher to update server files and do hot-reload on dev.
-var chokidar = require('chokidar')
-var watcher = chokidar.watch('.')
-watcher.on('ready', function() {
-  watcher.on('all', function() {
-    console.log("Clearing /dist/ module cache from server")
-    Object.keys(require.cache).forEach(function(id) {
-      if (/[\/\\]app[\/\\]/.test(id)) delete require.cache[id]
-    })
-  })
-})
-
 setRoutes(app)
 
 app.listen(port, () => {

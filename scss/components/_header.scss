@@ -14,6 +14,9 @@ header {
       background-image: url('/static/images/navbar/default-triangle.png');
       background-size: cover;
       background-position: bottom;
+      @media (max-width: 810px) {
+        height: 47px;
+      }
     }
     padding: 10px 32px;
     display: flex;
@@ -26,11 +29,38 @@ header {
         max-width: 196px;
         max-height: 48px;
       }
+      @media (max-width: 810px) {
+        img {
+          max-width: 100px;
+        }
+      }
     }
     .nav-container {
-      a.btn {
-        font-family: 'SourceSansPro-Regular';
+      a.nav-link {
+        color: $primary;
+        padding: 6px 20px 5px;
+        font-family: 'CrimsonText-Regular';
         margin-left: 32px;
+        text-decoration: none;
+        &:hover {
+          cursor: pointer;
+        }
+        &:hover {
+          color: darken($primary, 15%);
+          text-decoration: underline;
+        }
+        &.active {
+          text-decoration: underline;
+        }
+        @media (max-width: 810px) {
+          display: none;
+        }
+      }
+      .side-menu-button {
+        display: none;
+        @media (max-width: 810px) {
+          display: block;
+        }
       }
     }
   }
@@ -51,6 +81,9 @@ header {
       }
     }
     .user-info {
+      @media (max-width: 810px) {
+        display: none;
+      }
       div {
         display: flex;
         align-items: center;

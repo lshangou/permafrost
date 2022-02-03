@@ -12,29 +12,29 @@ body {
 
 a.btn {
   cursor: pointer;
-  padding: 3px 28px 2px;
-  border-radius: $border-radius;
+  padding: 6px 20px 5px;
   outline: 0;
   border: 0;
-  font-size: 18px;
-  font-family: 'CrimsonText-Regular';
+  font-size: 14px;
+  font-family: 'SourceSansPro-Regular';
   box-shadow: 0;
   text-decoration: none;
+  text-transform: uppercase;
   &.dark {
-    color: $dark-text;
-    background-color: $primary;
+    color: $primary;
+    background-color: $dark-bg;
+    border: 1px solid $primary;
     &:hover {
-      background-color: darken($primary, 5%);
+      background-color: darken($dark-bg, 5%);
+      box-shadow: 0 3px 6px $box-shadow;
     }
     &-outline {
       background-color: transparent !important;
-      border: 2px solid $dark-text;
+      border: 2px solid $primary;
+      color: $primary;
       &:hover {
         background-color: darken($primary, 5%) !important;
       }
     }
-  }
-  &.active {
-    box-shadow: $box-shadow;
   }
 }

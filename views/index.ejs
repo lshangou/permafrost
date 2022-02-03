@@ -1,10 +1,5 @@
-<%- include('./includes/customHead', { title: 'Permafrost - Home', styles: ['main'] }) %>
-<body>
-  <%- include('./components/permafrost_mtg/header') %>
-  Home teste
-  <% if(user) { %>
-    <pre><%= user.name %></pre>
-  <% } %>
-  <%- include('./components/permafrost_mtg/list-block') %>
+<%- include('./includes/customHead', { title: 'Permafrost - Entrance', styles: ['main'] }) %>
+<body class="dark">
+  <%- include('./includes/header', { path: 'Permafrost /', page: 'Home', theme: 'default'}) %>
 </body>
 </html>
