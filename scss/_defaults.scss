@@ -55,3 +55,49 @@ a.btn {
     }
   }
 }
+
+button {
+  cursor: pointer;
+  padding: 6px 20px 5px;
+  outline: 0;
+  border: 0;
+  font-size: 14px;
+  font-family: 'SourceSansPro-Regular';
+  box-shadow: 0;
+  text-decoration: none;
+  text-transform: uppercase;
+  &.primary {
+    color: $primary;
+    background-color: $default-alt;
+    border: 1px solid $primary;
+    &:hover {
+      background-color: darken($default-alt, 5%);
+      box-shadow: 0 3px 6px $box-shadow;
+    }
+    &-outline {
+      background-color: transparent !important;
+      border: 2px solid $primary;
+      color: $primary;
+      &:hover {
+        background-color: darken($primary, 5%) !important;
+      }
+    }
+  }
+  &.black {
+    color: $primary;
+    background-color: $black;
+    border: 1px solid $primary;
+    &:hover {
+      background-color: darken($black, 5%);
+      box-shadow: 0 3px 6px $box-shadow;
+    }
+    &-outline {
+      background-color: transparent !important;
+      border: 2px solid $primary;
+      color: $primary;
+      &:hover {
+        background-color: darken($primary, 5%) !important;
+      }
+    }
+  }
+}

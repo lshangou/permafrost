@@ -1,12 +1,36 @@
 <%- include('../includes/customHead', { title: 'Permafrost - Login', styles: ['main'] }) %>
-<body>
+<body class="dark">
   <%- include('../includes/header', { path: 'Permafrost /', page: 'Login', theme: 'default'}) %>
-  <form>
-    <input type="text" placeholder="email" id="email">
-    <input type="password" placeholder="password" id="password">
-    <button id="loginSubmit">Submit</button>
-  </form>
-  <p id="result"></p>
+  <div class="pageLogin">
+    <div class="login-container">
+      <div class="logo-container">
+          <img src="/static/images/navbar/logo.png" alt="Permafrost">
+      </div>
+      <form class="login-form">
+        <div class="header">
+          <h3>Conecte-se</h3>
+          <p>Digite suas informações de login para se conectar no site.</p>
+        </div>
+        <div class="input-container">
+          <label for="email">E-mail</label>
+          <input type="text" placeholder="usuario@email.com" id="email">
+        </div>
+        <div class="input-container">
+          <label for="password">Senha</label>
+          <input type="password" placeholder="•••••••••••••" id="password">
+          <a href="/forgot-password">Esqueceu sua senha?</a>
+        </div>
+        <div class="text-center">
+          <button class="btn primary" id="loginSubmit">Conectar</button>
+          <div class="register-container">
+            <p>Ainda não possui uma conta?</p>
+            <a href="/register">Cadastre-se aqui</a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <p id="result"></p>
+  </div>
   
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>

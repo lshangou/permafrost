@@ -1,0 +1,114 @@
+.pageLogin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -50px;
+  @media(max-width: 600px) {
+    margin-top: -120px;
+  }
+  padding: 16px;
+  .login-container {
+    max-width: 500px;
+    color: $primary;
+    background-color: $default;
+    border: 1px solid $primary;
+    margin-top: 150px;
+    border-radius: $border-radius;
+    padding: 26px;
+    position: relative;
+    &::before {
+      content: "";
+      background-image: url('/static/images/login/login-corner-up.png');
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 26px;
+      height: 24px;
+    }
+    &::after {
+      content: "";
+      background-image: url('/static/images/login/login-corner-bottom.png');
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 150px;
+      height: 170px;
+    }
+  }
+  .logo-container {
+    position: absolute;
+    padding: 9px 10px 3px;
+    border: 1px solid $primary;
+    border-radius: $border-radius;
+    background-color: $default;
+    top: -25px;
+    right: 25px;
+    img {
+      max-width: 100px;
+    }
+  }
+  .login-form {
+    .header {
+      h3 {
+        margin: 0;
+        font-size: 48px;
+      }
+      p {
+        font-size: 16px;
+      }
+    }
+    .input-container {
+      label {
+        display: block;
+        font-size: 18px;
+        margin-bottom: 8px;
+      }
+      input {
+        // Padding messes with width.
+        font-family: 'SourceSansPro-Regular';
+        width: calc(100% - 40px);
+        font-size: 18px;
+        background-color: $default-alt;
+        outline: 0;
+        border: 1px solid $primary;
+        color: $primary;
+        padding: 10px 20px;
+        margin-bottom: 16px;
+        &:active {
+          background-color: $default-alt;
+        }
+        &:-webkit-autofill {
+          -webkit-box-shadow: 0 0 0px 1000px darken($default-alt, 5%) inset;
+        }
+        &::placeholder {
+          color: $primary;
+          font-family: 'SourceSansPro-Regular';
+        }
+      }
+      a {
+        display: block;
+        color: $primary;
+        margin-bottom: 16px;
+      }
+    }
+    button {
+      padding: 6px 80px 5px;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    .text-center {
+      padding: 20px 0;
+      text-align: center;
+      p {
+        margin-bottom: 8px;
+      }
+      a {
+        display: block;
+        color: $primary;
+        &:hover {
+          color: darken($primary, 15%);
+        }
+      }
+    }
+  }
+}
