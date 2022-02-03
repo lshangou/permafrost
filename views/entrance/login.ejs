@@ -11,6 +11,7 @@
           <h3>Conecte-se</h3>
           <p>Digite suas informações de login para se conectar no site.</p>
         </div>
+        <p class="message" id="result"></p>
         <div class="input-container">
           <label for="email">E-mail</label>
           <input type="text" placeholder="usuario@email.com" id="email">
@@ -29,7 +30,6 @@
         </div>
       </form>
     </div>
-    <p id="result"></p>
   </div>
   
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -56,10 +56,12 @@
       })
       .then(res => {
         if(res.data.type == "incorrectCredentials") {
+          document.getElementsByClassName('message')[0].style.display = 'block'
           document.getElementById("result").innerHTML = "E-mail ou senha inconrretos."
         }else {
+          document.getElementsByClassName('message')[0].style.display = 'block'
           document.getElementById("result").innerHTML = "Autenticado com sucesso. Redirecionando..."
-          window.location = 'http://localhost:3000/login'
+          window.location = 'http://localhost:3000/'
         }
         console.log(res)
       })

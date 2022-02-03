@@ -256,6 +256,14 @@ header .sub-bar .user-info div a {
 .pageLogin .login-form .header p {
   font-size: 16px;
 }
+.pageLogin .login-form .message {
+  font-size: 16px;
+  background-color: #873434;
+  padding: 8px 16px;
+  border-radius: 2px;
+  border: 1px solid #DFBE53;
+  display: none;
+}
 .pageLogin .login-form .input-container label {
   display: block;
   font-size: 18px;

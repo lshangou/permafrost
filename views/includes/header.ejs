@@ -53,10 +53,10 @@
         })
         .then(res => {
           if(res.data.type == 'successfulRequest') {
-            document.location.reload(true);
+            document.location.replace('/login')
           }else {
-            alert('Error.')
-            window.location('http:localhost:3000/entrance')
+            alert('Um erro inesperado ocorreu.')
+            document.location.replace('/login')
           }
         })
       })
