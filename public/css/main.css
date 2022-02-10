@@ -183,6 +183,34 @@ header .sub-bar .user-info div a {
   display: flex;
   align-items: center;
 }
+header .background-fade {
+  display: none;
+  width: 100vh;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #292929;
+  opacity: 0.2;
+  z-index: 99;
+}
+header .background-fade.open {
+  display: block;
+}
+header .side-menu {
+  display: none;
+  width: 75%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #2C3C68;
+  padding: 32px;
+  z-index: 100;
+}
+header .side-menu.open {
+  display: block;
+}
 
 .page404 {
   color: #F0F0F0;
@@ -218,6 +246,7 @@ header .sub-bar .user-info div a {
   border-radius: 2px;
   padding: 26px;
   position: relative;
+  box-shadow: 0 4px 4px #00000040;
 }
 .pageLogin .login-container::before {
   content: "";

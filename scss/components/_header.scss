@@ -108,4 +108,32 @@ header {
       }
     }
   }
+  .background-fade {
+    display: none;
+    width: 100vh;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: $black;
+    opacity: .2;
+    z-index: 99;
+  }
+  .background-fade.open {
+    display: block;
+  }
+  .side-menu {
+    display: none;
+    width: 75%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: $default-alt;
+    padding: 32px;
+    z-index: 100;
+  }
+  .side-menu.open {
+    display: block;
+  }
 }
